@@ -8,7 +8,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+permissions:
+  contents: write
 jobs:
   deploy-site:
     runs-on: ubuntu-latest
@@ -25,11 +26,7 @@ jobs:
         with:
           name: built-output
           path: ./docs
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.5.0
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          deploy_key: ${{ secrets.ACTION_DEPLOY_KEY }}
-          publish_dir: ./docs
-          commit_message: Deploy to GitHub Pages
+          folder: ./docs # The folder the action should deploy.
